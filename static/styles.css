@@ -75,20 +75,43 @@ body {
 
 /* Hero Section Specific */
 #profile {
-    background-color: var(--dark-bg);
+    /* Dark radiant gradient background for a modern hero */
+    background:
+        radial-gradient(1000px circle at -10% -10%, rgba(99, 102, 241, 0.35), transparent 60%),
+        radial-gradient(800px circle at 110% -10%, rgba(236, 72, 153, 0.25), transparent 60%),
+        linear-gradient(180deg, #0b1020 0%, #0a0f1e 60%, #070b16 100%);
+    color: #e5e7eb; /* Default light text on dark */
     padding: 100px 0 100px;
 }
 
 .profile-title {
     font-size: 3.5rem;
     font-weight: 900;
-    color: var(--text-light) !important;
+    color: #ffffff !important; /* Ensure strong contrast on dark bg */
 }
 
+/* Keep the accent vibe but ensure readability on dark */
 .profile-subtitle {
-    color: var(--primary-color);
+    color: #60a5fa; /* Soft sky-blue accent */
     font-weight: 700;
     font-size: 1.5rem;
+}
+
+/* Improve text contrast inside hero */
+#profile .text-muted,
+#profile .text-secondary {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+
+/* Button styling tuned for dark hero */
+#profile .btn-outline-light {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.6);
+}
+#profile .btn-outline-light:hover {
+    background-color: #ffffff;
+    color: #0b1020;
+    border-color: #ffffff;
 }
 
 .profile-image-container {
