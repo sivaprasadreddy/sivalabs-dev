@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agentic Engineering Fundamentals — SivaLabs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0d1117; color: #e6edf3; padding-top: 64px; }
+        .navbar-dark-custom { background-color: #161b22; border-bottom: 1px solid #30363d; }
+        .navbar-brand-custom { color: #e6edf3 !important; font-weight: 700; letter-spacing: 0.05em; }
+        .nav-link-custom { color: #8b949e !important; font-weight: 600; transition: color 0.2s; }
+        .nav-link-custom:hover { color: #e6edf3 !important; }
+
+        .course-hero {
+            background: radial-gradient(800px circle at 80% 50%, rgba(163, 113, 247, 0.08), transparent 60%),
+                        radial-gradient(600px circle at 20% 50%, rgba(163, 113, 247, 0.05), transparent 60%), #0d1117;
+            padding: 60px 0; border-bottom: 1px solid #30363d;
+        }
+        .course-icon-lg {
+            width: 64px; height: 64px; border-radius: 14px;
+            background-color: rgba(163, 113, 247, 0.12);
+            display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
+        }
+        .badge-level {
+            font-size: 0.78rem; font-weight: 600; padding: 0.3em 0.8em; border-radius: 20px;
+            border: 1px solid rgba(163, 113, 247, 0.4); background-color: rgba(163, 113, 247, 0.1); color: #a371f7;
+        }
+        .meta-item { display: flex; align-items: center; gap: 0.5rem; color: #8b949e; font-size: 0.9rem; }
+        .meta-item i { color: #a371f7; width: 16px; }
+
+        .accordion-item { background-color: #161b22; border: 1px solid #30363d; border-radius: 10px !important; overflow: hidden; margin-bottom: 0.5rem; }
+        .accordion-button { background-color: #161b22; color: #e6edf3; font-weight: 600; font-size: 0.95rem; padding: 1rem 1.25rem; border: none; box-shadow: none !important; }
+        .accordion-button:not(.collapsed) { background-color: #1c2128; color: #a371f7; box-shadow: none !important; }
+        .accordion-button::after { filter: invert(1) brightness(0.6); }
+        .accordion-button:not(.collapsed)::after { filter: invert(55%) sepia(50%) saturate(600%) hue-rotate(240deg) brightness(1.1); }
+        .accordion-body { background-color: #161b22; border-top: 1px solid #30363d; padding: 1rem 1.25rem; }
+
+        .topic-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+        .topic-list li { display: flex; align-items: flex-start; gap: 0.6rem; color: #8b949e; font-size: 0.9rem; line-height: 1.5; }
+        .topic-list li i { color: #a371f7; margin-top: 3px; flex-shrink: 0; font-size: 0.7rem; }
+
+        .module-badge {
+            font-size: 0.72rem; font-weight: 700; padding: 0.2em 0.6em; border-radius: 6px;
+            background-color: rgba(163, 113, 247, 0.1); color: #a371f7;
+            border: 1px solid rgba(163, 113, 247, 0.3); margin-right: 0.5rem; white-space: nowrap; flex-shrink: 0;
+        }
+        .sidebar-card { background-color: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 1.5rem; position: sticky; top: 80px; }
+        .sidebar-card h5 { color: #e6edf3; font-weight: 700; margin-bottom: 1rem; }
+        .sidebar-item { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid #21262d; font-size: 0.88rem; }
+        .sidebar-item:last-child { border-bottom: none; }
+        .sidebar-item .label { color: #8b949e; }
+        .sidebar-item .value { color: #e6edf3; font-weight: 600; }
+        footer { background-color: #161b22; border-top: 1px solid #30363d; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark-custom">
+    <div class="container">
+        <a class="navbar-brand navbar-brand-custom" href="/">SIVALABS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="border-color: #30363d;">
+            <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav gap-1">
+                <li class="nav-item"><a class="nav-link nav-link-custom" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link nav-link-custom" href="/index.html">Courses</a></li>
+                <li class="nav-item"><a class="nav-link nav-link-custom" href="/contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <section class="course-hero">
+        <div class="container">
+            <a href="/index.html" class="d-inline-flex align-items-center gap-2 mb-4 text-decoration-none" style="color: #8b949e; font-size: 0.875rem;">
+                <i class="fa-solid fa-arrow-left fa-xs"></i> Back to Courses
+            </a>
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <div class="course-icon-lg"><i class="fa-solid fa-robot" style="color: #a371f7;"></i></div>
+                <span class="badge-level">Intermediate</span>
+            </div>
+            <h1 class="fw-bold mb-3" style="font-size: 2.25rem; color: #e6edf3;">AI Agentic Engineering Fundamentals</h1>
+            <p style="color: #8b949e; max-width: 640px; line-height: 1.7; margin-bottom: 1.75rem;">
+                Learn to design and build AI-powered applications, agents, and multi-agent systems using Java.
+                You'll implement RAG pipelines, function calling, agentic workflows, and production-ready
+                patterns using Spring AI, LangChain4j, and Embabel.
+            </p>
+            <div class="d-flex flex-wrap gap-4">
+                <div class="meta-item"><i class="fa-solid fa-layer-group"></i><span>10 Modules</span></div>
+                <div class="meta-item"><i class="fa-solid fa-circle-dot"></i><span>58 Topics</span></div>
+                <div class="meta-item"><i class="fa-solid fa-graduation-cap"></i><span>Java Fundamentals required</span></div>
+                <div class="meta-item"><i class="fa-solid fa-robot"></i><span>Spring AI · LangChain4j · Embabel</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 60px 0 80px;">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-8">
+                    <h2 class="fw-bold mb-4" style="color: #e6edf3; font-size: 1.4rem;">Course Curriculum</h2>
+                    <div class="accordion" id="curriculumAccordion">
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#m1">
+                                    <span class="flex-grow-1">AI &amp; LLM Fundamentals</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m1" class="accordion-collapse collapse show" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> How large language models work</li>
+                                        <li><i class="fa-solid fa-circle"></i> Tokens, context windows & temperature</li>
+                                        <li><i class="fa-solid fa-circle"></i> Prompt engineering fundamentals</li>
+                                        <li><i class="fa-solid fa-circle"></i> Model capabilities & limitations</li>
+                                        <li><i class="fa-solid fa-circle"></i> Choosing the right model for the task</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m2">
+                                    <span class="flex-grow-1">Spring AI</span>
+                                    <span class="module-badge">6 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m2" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Spring AI setup & model configuration</li>
+                                        <li><i class="fa-solid fa-circle"></i> ChatClient & prompt templates</li>
+                                        <li><i class="fa-solid fa-circle"></i> Streaming responses</li>
+                                        <li><i class="fa-solid fa-circle"></i> Structured output with bean mapping</li>
+                                        <li><i class="fa-solid fa-circle"></i> Multimodal inputs (image, audio)</li>
+                                        <li><i class="fa-solid fa-circle"></i> Advisors & conversation memory</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m3">
+                                    <span class="flex-grow-1">LangChain4j</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m3" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> LangChain4j setup & chat models</li>
+                                        <li><i class="fa-solid fa-circle"></i> AI Services & declarative interfaces</li>
+                                        <li><i class="fa-solid fa-circle"></i> Structured prompts with @SystemMessage</li>
+                                        <li><i class="fa-solid fa-circle"></i> Response parsing & type-safe output</li>
+                                        <li><i class="fa-solid fa-circle"></i> Chat memory & message history</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m4">
+                                    <span class="flex-grow-1">Tool Use &amp; Function Calling</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m4" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Defining tools & @Tool annotation</li>
+                                        <li><i class="fa-solid fa-circle"></i> Tool execution & result injection</li>
+                                        <li><i class="fa-solid fa-circle"></i> Parallel & sequential tool calls</li>
+                                        <li><i class="fa-solid fa-circle"></i> Error handling in tool execution</li>
+                                        <li><i class="fa-solid fa-circle"></i> Security considerations for tool use</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m5">
+                                    <span class="flex-grow-1">RAG — Retrieval Augmented Generation</span>
+                                    <span class="module-badge">6 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m5" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Embeddings & semantic similarity</li>
+                                        <li><i class="fa-solid fa-circle"></i> Vector stores — PGVector, Chroma, Weaviate</li>
+                                        <li><i class="fa-solid fa-circle"></i> Document ingestion & chunking strategies</li>
+                                        <li><i class="fa-solid fa-circle"></i> Retrieval pipeline & similarity search</li>
+                                        <li><i class="fa-solid fa-circle"></i> Re-ranking retrieved results</li>
+                                        <li><i class="fa-solid fa-circle"></i> Evaluating RAG quality</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m6">
+                                    <span class="flex-grow-1">AI Memory &amp; Context Management</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m6" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Conversation memory types — window, summary</li>
+                                        <li><i class="fa-solid fa-circle"></i> Persistent memory with databases</li>
+                                        <li><i class="fa-solid fa-circle"></i> Token budget management</li>
+                                        <li><i class="fa-solid fa-circle"></i> Context compression techniques</li>
+                                        <li><i class="fa-solid fa-circle"></i> Session isolation & multi-user memory</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m7">
+                                    <span class="flex-grow-1">Agentic Workflows</span>
+                                    <span class="module-badge">6 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m7" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> The agent loop — observe, plan, act</li>
+                                        <li><i class="fa-solid fa-circle"></i> ReAct (Reasoning + Acting) pattern</li>
+                                        <li><i class="fa-solid fa-circle"></i> Multi-step task decomposition</li>
+                                        <li><i class="fa-solid fa-circle"></i> State management across steps</li>
+                                        <li><i class="fa-solid fa-circle"></i> Human-in-the-loop checkpoints</li>
+                                        <li><i class="fa-solid fa-circle"></i> Handling agent failures & retries</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m8">
+                                    <span class="flex-grow-1">Multi-Agent Systems with Embabel</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m8" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Embabel architecture & goals</li>
+                                        <li><i class="fa-solid fa-circle"></i> Defining agents & their capabilities</li>
+                                        <li><i class="fa-solid fa-circle"></i> Supervisor & worker agent pattern</li>
+                                        <li><i class="fa-solid fa-circle"></i> Parallel agent execution</li>
+                                        <li><i class="fa-solid fa-circle"></i> Agent communication & result aggregation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m9">
+                                    <span class="flex-grow-1">MCP — Model Context Protocol</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m9" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> MCP protocol overview</li>
+                                        <li><i class="fa-solid fa-circle"></i> Building an MCP server in Java</li>
+                                        <li><i class="fa-solid fa-circle"></i> Exposing tools & resources via MCP</li>
+                                        <li><i class="fa-solid fa-circle"></i> Consuming MCP servers from agents</li>
+                                        <li><i class="fa-solid fa-circle"></i> MCP security & authentication</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m10">
+                                    <span class="flex-grow-1">Production AI Applications</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m10" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Observability — tracing LLM calls</li>
+                                        <li><i class="fa-solid fa-circle"></i> Cost management & token budgets</li>
+                                        <li><i class="fa-solid fa-circle"></i> Latency optimisation & prompt caching</li>
+                                        <li><i class="fa-solid fa-circle"></i> Evaluating AI application quality</li>
+                                        <li><i class="fa-solid fa-circle"></i> Testing AI applications with deterministic assertions</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="sidebar-card">
+                        <h5>Course Details</h5>
+                        <div class="sidebar-item"><span class="label">Level</span><span class="value">Intermediate</span></div>
+                        <div class="sidebar-item"><span class="label">Modules</span><span class="value">10</span></div>
+                        <div class="sidebar-item"><span class="label">Topics</span><span class="value">58</span></div>
+                        <div class="sidebar-item"><span class="label">Frameworks</span><span class="value">Spring AI, LangChain4j</span></div>
+                        <div class="sidebar-item"><span class="label">Prerequisites</span><span class="value">Java Fundamentals</span></div>
+                        <hr style="border-color: #30363d; margin: 1.25rem 0;">
+                        <h5>What You'll Learn</h5>
+                        <ul class="topic-list">
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Build AI applications with Spring AI & LangChain4j</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Implement RAG pipelines with vector stores</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Design agentic workflows with tool use</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Build multi-agent systems with Embabel</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Create and consume MCP servers</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Ship production AI apps with observability</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="text-center py-4">
+    <div class="container">
+        <p class="mb-0" style="color: #8b949e;">&copy; 2026 SivaLabs.</p>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

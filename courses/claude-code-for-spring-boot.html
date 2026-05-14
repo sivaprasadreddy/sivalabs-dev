@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code for Spring Boot Application Developers — SivaLabs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0d1117; color: #e6edf3; padding-top: 64px; }
+        .navbar-dark-custom { background-color: #161b22; border-bottom: 1px solid #30363d; }
+        .navbar-brand-custom { color: #e6edf3 !important; font-weight: 700; letter-spacing: 0.05em; }
+        .nav-link-custom { color: #8b949e !important; font-weight: 600; transition: color 0.2s; }
+        .nav-link-custom:hover { color: #e6edf3 !important; }
+
+        .course-hero {
+            background: radial-gradient(800px circle at 80% 50%, rgba(247, 129, 102, 0.08), transparent 60%),
+                        radial-gradient(600px circle at 20% 50%, rgba(247, 129, 102, 0.05), transparent 60%), #0d1117;
+            padding: 60px 0; border-bottom: 1px solid #30363d;
+        }
+        .course-icon-lg {
+            width: 64px; height: 64px; border-radius: 14px;
+            background-color: rgba(247, 129, 102, 0.12);
+            display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
+        }
+        .badge-level {
+            font-size: 0.78rem; font-weight: 600; padding: 0.3em 0.8em; border-radius: 20px;
+            border: 1px solid rgba(247, 129, 102, 0.4); background-color: rgba(247, 129, 102, 0.1); color: #f78166;
+        }
+        .meta-item { display: flex; align-items: center; gap: 0.5rem; color: #8b949e; font-size: 0.9rem; }
+        .meta-item i { color: #f78166; width: 16px; }
+
+        .accordion-item { background-color: #161b22; border: 1px solid #30363d; border-radius: 10px !important; overflow: hidden; margin-bottom: 0.5rem; }
+        .accordion-button { background-color: #161b22; color: #e6edf3; font-weight: 600; font-size: 0.95rem; padding: 1rem 1.25rem; border: none; box-shadow: none !important; }
+        .accordion-button:not(.collapsed) { background-color: #1c2128; color: #f78166; box-shadow: none !important; }
+        .accordion-button::after { filter: invert(1) brightness(0.6); }
+        .accordion-button:not(.collapsed)::after { filter: invert(60%) sepia(60%) saturate(500%) hue-rotate(330deg) brightness(1.1); }
+        .accordion-body { background-color: #161b22; border-top: 1px solid #30363d; padding: 1rem 1.25rem; }
+
+        .topic-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+        .topic-list li { display: flex; align-items: flex-start; gap: 0.6rem; color: #8b949e; font-size: 0.9rem; line-height: 1.5; }
+        .topic-list li i { color: #f78166; margin-top: 3px; flex-shrink: 0; font-size: 0.7rem; }
+
+        .module-badge {
+            font-size: 0.72rem; font-weight: 700; padding: 0.2em 0.6em; border-radius: 6px;
+            background-color: rgba(247, 129, 102, 0.1); color: #f78166;
+            border: 1px solid rgba(247, 129, 102, 0.3); margin-right: 0.5rem; white-space: nowrap; flex-shrink: 0;
+        }
+        .sidebar-card { background-color: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 1.5rem; position: sticky; top: 80px; }
+        .sidebar-card h5 { color: #e6edf3; font-weight: 700; margin-bottom: 1rem; }
+        .sidebar-item { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid #21262d; font-size: 0.88rem; }
+        .sidebar-item:last-child { border-bottom: none; }
+        .sidebar-item .label { color: #8b949e; }
+        .sidebar-item .value { color: #e6edf3; font-weight: 600; }
+        footer { background-color: #161b22; border-top: 1px solid #30363d; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark-custom">
+    <div class="container">
+        <a class="navbar-brand navbar-brand-custom" href="/">SIVALABS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="border-color: #30363d;">
+            <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav gap-1">
+                <li class="nav-item"><a class="nav-link nav-link-custom" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link nav-link-custom" href="/index.html">Courses</a></li>
+                <li class="nav-item"><a class="nav-link nav-link-custom" href="/contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <section class="course-hero">
+        <div class="container">
+            <a href="/index.html" class="d-inline-flex align-items-center gap-2 mb-4 text-decoration-none" style="color: #8b949e; font-size: 0.875rem;">
+                <i class="fa-solid fa-arrow-left fa-xs"></i> Back to Courses
+            </a>
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <div class="course-icon-lg"><i class="fa-solid fa-terminal" style="color: #f78166;"></i></div>
+                <span class="badge-level">Intermediate</span>
+            </div>
+            <h1 class="fw-bold mb-3" style="font-size: 2.25rem; color: #e6edf3;">Claude Code for Spring Boot Application Developers</h1>
+            <p style="color: #8b949e; max-width: 640px; line-height: 1.7; margin-bottom: 1.75rem;">
+                Learn to use Claude Code as your AI pair programmer for Spring Boot development.
+                From project scaffolding and test generation to refactoring, debugging, and multi-agent
+                workflows — you'll develop a workflow that makes you dramatically more productive.
+            </p>
+            <div class="d-flex flex-wrap gap-4">
+                <div class="meta-item"><i class="fa-solid fa-layer-group"></i><span>10 Modules</span></div>
+                <div class="meta-item"><i class="fa-solid fa-circle-dot"></i><span>54 Topics</span></div>
+                <div class="meta-item"><i class="fa-solid fa-graduation-cap"></i><span>Mastering Spring Boot required</span></div>
+                <div class="meta-item"><i class="fa-solid fa-terminal"></i><span>Claude Code CLI</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 60px 0 80px;">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-8">
+                    <h2 class="fw-bold mb-4" style="color: #e6edf3; font-size: 1.4rem;">Course Curriculum</h2>
+                    <div class="accordion" id="curriculumAccordion">
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#m1">
+                                    <span class="flex-grow-1">Getting Started with Claude Code</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m1" class="accordion-collapse collapse show" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Installation & authentication</li>
+                                        <li><i class="fa-solid fa-circle"></i> CLI basics — commands, flags, modes</li>
+                                        <li><i class="fa-solid fa-circle"></i> CLAUDE.md — project instructions file</li>
+                                        <li><i class="fa-solid fa-circle"></i> Permissions & trust levels</li>
+                                        <li><i class="fa-solid fa-circle"></i> Slash commands & keyboard shortcuts</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m2">
+                                    <span class="flex-grow-1">Project Setup &amp; Scaffolding</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m2" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Generating Spring Boot projects from scratch</li>
+                                        <li><i class="fa-solid fa-circle"></i> Package structure & architecture setup</li>
+                                        <li><i class="fa-solid fa-circle"></i> Maven/Gradle configuration & BOM management</li>
+                                        <li><i class="fa-solid fa-circle"></i> Docker Compose setup for local development</li>
+                                        <li><i class="fa-solid fa-circle"></i> Taskfile for common developer tasks</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m3">
+                                    <span class="flex-grow-1">Building REST APIs</span>
+                                    <span class="module-badge">6 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m3" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Generating entities, repositories & Flyway migrations</li>
+                                        <li><i class="fa-solid fa-circle"></i> Service layer & business logic</li>
+                                        <li><i class="fa-solid fa-circle"></i> REST controllers & DTO generation</li>
+                                        <li><i class="fa-solid fa-circle"></i> Validation & exception handling</li>
+                                        <li><i class="fa-solid fa-circle"></i> OpenAPI documentation</li>
+                                        <li><i class="fa-solid fa-circle"></i> Iterating on feedback & requirements</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m4">
+                                    <span class="flex-grow-1">Test Generation &amp; TDD</span>
+                                    <span class="module-badge">6 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m4" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Generating unit tests for service logic</li>
+                                        <li><i class="fa-solid fa-circle"></i> @WebMvcTest & MockMvc test generation</li>
+                                        <li><i class="fa-solid fa-circle"></i> @DataJpaTest with Testcontainers</li>
+                                        <li><i class="fa-solid fa-circle"></i> Integration test scaffolding</li>
+                                        <li><i class="fa-solid fa-circle"></i> Generating tests for edge cases & error paths</li>
+                                        <li><i class="fa-solid fa-circle"></i> Analysing & improving test coverage</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m5">
+                                    <span class="flex-grow-1">Refactoring &amp; Code Quality</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m5" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Extracting methods, classes & modules</li>
+                                        <li><i class="fa-solid fa-circle"></i> Simplifying complex logic</li>
+                                        <li><i class="fa-solid fa-circle"></i> Detecting & fixing code smells</li>
+                                        <li><i class="fa-solid fa-circle"></i> ArchUnit tests for architecture enforcement</li>
+                                        <li><i class="fa-solid fa-circle"></i> Dependency analysis & clean-up</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m6">
+                                    <span class="flex-grow-1">Debugging &amp; Troubleshooting</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m6" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Diagnosing stack traces & exceptions</li>
+                                        <li><i class="fa-solid fa-circle"></i> Log analysis & structured diagnostics</li>
+                                        <li><i class="fa-solid fa-circle"></i> SQL query debugging & optimisation</li>
+                                        <li><i class="fa-solid fa-circle"></i> Identifying performance bottlenecks</li>
+                                        <li><i class="fa-solid fa-circle"></i> Fixing flaky & failing tests</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m7">
+                                    <span class="flex-grow-1">Working with Git &amp; PRs</span>
+                                    <span class="module-badge">4 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m7" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Crafting meaningful commit messages</li>
+                                        <li><i class="fa-solid fa-circle"></i> Generating PR descriptions & summaries</li>
+                                        <li><i class="fa-solid fa-circle"></i> Code review assistance</li>
+                                        <li><i class="fa-solid fa-circle"></i> Branch management & conflict resolution</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m8">
+                                    <span class="flex-grow-1">Multi-Agent Workflows</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m8" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Parallel agent execution</li>
+                                        <li><i class="fa-solid fa-circle"></i> Explore agent for codebase research</li>
+                                        <li><i class="fa-solid fa-circle"></i> Plan mode — designing before coding</li>
+                                        <li><i class="fa-solid fa-circle"></i> Subagent delegation patterns</li>
+                                        <li><i class="fa-solid fa-circle"></i> Background tasks & long-running operations</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m9">
+                                    <span class="flex-grow-1">MCP Servers &amp; Extensibility</span>
+                                    <span class="module-badge">4 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m9" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Configuring MCP servers in Claude Code</li>
+                                        <li><i class="fa-solid fa-circle"></i> Useful MCP servers for Java developers</li>
+                                        <li><i class="fa-solid fa-circle"></i> Building a custom MCP server</li>
+                                        <li><i class="fa-solid fa-circle"></i> Hooks — automating pre/post actions</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m10">
+                                    <span class="flex-grow-1">Advanced Patterns &amp; Best Practices</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m10" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> CLAUDE.md best practices for Spring Boot projects</li>
+                                        <li><i class="fa-solid fa-circle"></i> Memory system — saving & recalling context</li>
+                                        <li><i class="fa-solid fa-circle"></i> CI/CD integration with GitHub Actions</li>
+                                        <li><i class="fa-solid fa-circle"></i> Autonomous mode & permission tuning</li>
+                                        <li><i class="fa-solid fa-circle"></i> Custom skills & reusable workflows</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="sidebar-card">
+                        <h5>Course Details</h5>
+                        <div class="sidebar-item"><span class="label">Level</span><span class="value">Intermediate</span></div>
+                        <div class="sidebar-item"><span class="label">Modules</span><span class="value">10</span></div>
+                        <div class="sidebar-item"><span class="label">Topics</span><span class="value">54</span></div>
+                        <div class="sidebar-item"><span class="label">Tool</span><span class="value">Claude Code CLI</span></div>
+                        <div class="sidebar-item"><span class="label">Prerequisites</span><span class="value">Mastering Spring Boot</span></div>
+                        <hr style="border-color: #30363d; margin: 1.25rem 0;">
+                        <h5>What You'll Learn</h5>
+                        <ul class="topic-list">
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Use Claude Code as a daily development tool</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Scaffold & build Spring Boot apps faster</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Generate comprehensive test suites</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Refactor & improve existing codebases</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Run parallel agents for complex tasks</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Extend Claude Code with MCP & hooks</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="text-center py-4">
+    <div class="container">
+        <p class="mb-0" style="color: #8b949e;">&copy; 2026 SivaLabs.</p>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

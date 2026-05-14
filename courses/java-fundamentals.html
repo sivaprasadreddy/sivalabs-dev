@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Fundamentals — SivaLabs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117;
+            color: #e6edf3;
+            padding-top: 64px;
+        }
+
+        .navbar-dark-custom {
+            background-color: #161b22;
+            border-bottom: 1px solid #30363d;
+        }
+
+        .navbar-brand-custom {
+            color: #e6edf3 !important;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-link-custom {
+            color: #8b949e !important;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-link-custom:hover {
+            color: #e6edf3 !important;
+        }
+
+        .course-hero {
+            background:
+                radial-gradient(800px circle at 80% 50%, rgba(248, 152, 32, 0.08), transparent 60%),
+                radial-gradient(600px circle at 20% 50%, rgba(248, 152, 32, 0.05), transparent 60%),
+                #0d1117;
+            padding: 60px 0;
+            border-bottom: 1px solid #30363d;
+        }
+
+        .course-icon-lg {
+            width: 64px;
+            height: 64px;
+            border-radius: 14px;
+            background-color: rgba(248, 152, 32, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .badge-level {
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 0.3em 0.8em;
+            border-radius: 20px;
+            border: 1px solid rgba(248, 152, 32, 0.4);
+            background-color: rgba(248, 152, 32, 0.1);
+            color: #f89820;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #8b949e;
+            font-size: 0.9rem;
+        }
+
+        .meta-item i {
+            color: #f89820;
+            width: 16px;
+        }
+
+        /* Accordion overrides */
+        .accordion-item {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 10px !important;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .accordion-button {
+            background-color: #161b22;
+            color: #e6edf3;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 1rem 1.25rem;
+            border: none;
+            box-shadow: none !important;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #1c2128;
+            color: #f89820;
+            box-shadow: none !important;
+        }
+
+        .accordion-button::after {
+            filter: invert(1) brightness(0.6);
+        }
+
+        .accordion-button:not(.collapsed)::after {
+            filter: invert(62%) sepia(60%) saturate(600%) hue-rotate(5deg) brightness(1);
+        }
+
+        .accordion-body {
+            background-color: #161b22;
+            border-top: 1px solid #30363d;
+            padding: 1rem 1.25rem;
+        }
+
+        .topic-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .topic-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            color: #8b949e;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .topic-list li i {
+            color: #f89820;
+            margin-top: 3px;
+            flex-shrink: 0;
+            font-size: 0.7rem;
+        }
+
+        .module-badge {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.2em 0.6em;
+            border-radius: 6px;
+            background-color: rgba(248, 152, 32, 0.1);
+            color: #f89820;
+            border: 1px solid rgba(248, 152, 32, 0.3);
+            margin-right: 0.5rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .sidebar-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: sticky;
+            top: 80px;
+        }
+
+        .sidebar-card h5 {
+            color: #e6edf3;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #21262d;
+            font-size: 0.88rem;
+        }
+
+        .sidebar-item:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-item .label {
+            color: #8b949e;
+        }
+
+        .sidebar-item .value {
+            color: #e6edf3;
+            font-weight: 600;
+        }
+
+        footer {
+            background-color: #161b22;
+            border-top: 1px solid #30363d;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark-custom">
+    <div class="container">
+        <a class="navbar-brand navbar-brand-custom" href="/">SIVALABS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav"
+                aria-expanded="false" aria-label="Toggle navigation"
+                style="border-color: #30363d;">
+            <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav gap-1">
+                <li class="nav-item">
+                    <a class="nav-link nav-link-custom" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-custom" href="/index.html">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-custom" href="/contact.html">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main>
+
+    <!-- Hero -->
+    <section class="course-hero">
+        <div class="container">
+            <a href="/index.html" class="d-inline-flex align-items-center gap-2 mb-4 text-decoration-none"
+               style="color: #8b949e; font-size: 0.875rem;">
+                <i class="fa-solid fa-arrow-left fa-xs"></i> Back to Courses
+            </a>
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <div class="course-icon-lg">
+                    <i class="fa-brands fa-java" style="color: #f89820;"></i>
+                </div>
+                <span class="badge-level">Beginner</span>
+            </div>
+            <h1 class="fw-bold mb-3" style="font-size: 2.25rem; color: #e6edf3;">Java Fundamentals</h1>
+            <p style="color: #8b949e; max-width: 640px; line-height: 1.7; margin-bottom: 1.75rem;">
+                A comprehensive introduction to Java programming. Starting from the very basics,
+                you'll build a solid foundation in object-oriented design, the collections framework,
+                generics, streams, and modern Java syntax — everything you need to write clean,
+                idiomatic Java with confidence.
+            </p>
+            <div class="d-flex flex-wrap gap-4">
+                <div class="meta-item">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>10 Modules</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fa-solid fa-circle-dot"></i>
+                    <span>60+ Topics</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>No prior experience needed</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fa-brands fa-java"></i>
+                    <span>Java 21+</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <section style="padding: 60px 0 80px;">
+        <div class="container">
+            <div class="row g-5">
+
+                <!-- Curriculum -->
+                <div class="col-lg-8">
+                    <h2 class="fw-bold mb-4" style="color: #e6edf3; font-size: 1.4rem;">Course Curriculum</h2>
+
+                    <div class="accordion" id="curriculumAccordion">
+
+                        <!-- Module 1 -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#module1">
+                                    <span class="flex-grow-1">Getting Started with Java</span>
+                                    <span class="module-badge">6 topics</span>
+                                </button>
+                            </h3>
+                            <div id="module1" class="accordion-collapse collapse show"
+                                 data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Introduction to Java & the JVM</li>
+                                        <li><i class="fa-solid fa-circle"></i> Setting up the development environment (JDK, IntelliJ IDEA)</li>
+                                        <li><i class="fa-solid fa-circle"></i> Writing and running your first Java program</li>
+                                        <li><i class="fa-solid fa-circle"></i> Variables, primitive data types & literals</li>
+                                        <li><i class="fa-solid fa-circle"></i> Operators & expressions</li>
+                                        <li><i class="fa-solid fa-circle"></i> Reading input with Scanner</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Module 2 -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#module2">
+                                    <span class="flex-grow-1">Control Flow</span>
+                                    <span class="module-badge">6 topics</span>
+                                </button>
+                            </h3>
+                            <div id="module2" class="accordion-collapse collapse"
+                                 data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> if / else if / else statements</li>
+                                        <li><i class="fa-solid fa-circle"></i> Switch statements & switch expressions</li>
+                                        <li><i class="fa-solid fa-circle"></i> for loop & enhanced for loop</li>
+                                        <li><i class="fa-solid fa-circle"></i> while & do-while loops</li>
+                                        <li><i class="fa-solid fa-circle"></i> break, continue & labelled statements</li>
+                                        <li><i class="fa-solid fa-circle"></i> Pattern matching in switch (Java 21)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Module 3 -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#module3">
+                                    <span class="flex-grow-1">Object-Oriented Programming</span>
+                                    <span class="module-badge">8 topics</span>
+                                </button>
+                            </h3>
+                            <div id="module3" class="accordion-collapse collapse"
+                                 data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Classes, objects & instance members</li>
+                                        <li><i class="fa-solid fa-circle"></i> Constructors & constructor overloading</li>
+                                        <li><i class="fa-solid fa-circle"></i> Encapsulation & access modifiers</li>
+                                        <li><i class="fa-solid fa-circle"></i> Inheritance & method overriding</li>
+                                        <li><i class="fa-solid fa-circle"></i> Polymorphism & dynamic dispatch</li>
+                                        <li><i class="fa-solid fa-circle"></i> Abstract classes</li>
+                                        <li><i class="fa-solid fa-circle"></i> Interfaces & default methods</li>
+                                        <li><i class="fa-solid fa-circle"></i> Static members & utility classes</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Module 4 -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#module4">
+                                    <span class="flex-grow-1">Strings &amp; Arrays</span>
+                                    <span class="module-badge">6 topics</span>
+                                </button>
+                            </h3>
+                            <div id="module4" class="accordion-collapse collapse"
+                                 data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> String immutability & common methods</li>
+                                        <li><i class="fa-solid fa-circle"></i> StringBuilder & string formatting</li>
+                                        <li><i class="fa-solid fa-circle"></i> Text blocks (Java 15+)</li>
+                                        <li><i class="fa-solid fa-circle"></i> One-dimensional & multi-dimensional arrays</li>
+                                        <li><i class="fa-solid fa-circle"></i> Varargs</li>
+                                        <li><i class="fa-solid fa-circle"></i> Arrays utility class</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Module 5 -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#module5">
+                                    <span class="flex-grow-1">Exception Handling</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="module5" class="accordion-collapse collapse"
+                                 data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Checked vs unchecked exceptions</li>
+                                        <li><i class="fa-solid fa-circle"></i> try / catch / finally blocks</li>
+                                        <li><i class="fa-solid fa-circle"></i> try-with-resources</li>
+                                        <li><i class="fa-solid fa-circle"></i> Creating custom exceptions</li>
+                                        <li><i class="fa-solid fa-circle"></i> Exception chaining & best practices</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Module 6 -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#module6">
+                                    <span class="flex-grow-1">Collections Framework</span>
+                                    <span class="module-badge">7 topics</span>
+                                </button>
+                            </h3>
+                            <div id="module6" class="accordion-collapse collapse"
+                                 data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> List — ArrayList & LinkedList</li>
+                                        <li><i class="fa-solid fa-circle"></i> Set — HashSet, LinkedHashSet & TreeSet</li>
+                                        <li><i class="fa-solid fa-circle"></i> Map — HashMap, LinkedHashMap & TreeMap</li>
+                                        <li><i class="fa-solid fa-circle"></i> Queue & Deque</li>
+                                        <li><i class="fa-solid fa-circle"></i> Iterating collections with iterators & streams</li>
+                                        <li><i class="fa-solid fa-circle"></i> Collections utility methods</li>
+                                        <li><i class="fa-solid fa-circle"></i> Comparable & Comparator</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Module 7 -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#module7">
+                                    <span class="flex-grow-1">Generics</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="module7" class="accordion-collapse collapse"
+                                 data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Why generics? Type erasure</li>
+                                        <li><i class="fa-solid fa-circle"></i> Generic classes & interfaces</li>
+                                        <li><i class="fa-solid fa-circle"></i> Generic methods</li>
+                                        <li><i class="fa-solid fa-circle"></i> Bounded type parameters</li>
+                                        <li><i class="fa-solid fa-circle"></i> Wildcards — upper, lower & unbounded</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Module 8 -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#module8">
+                                    <span class="flex-grow-1">Functional Programming &amp; Streams</span>
+                                    <span class="module-badge">7 topics</span>
+                                </button>
+                            </h3>
+                            <div id="module8" class="accordion-collapse collapse"
+                                 data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Lambda expressions</li>
+                                        <li><i class="fa-solid fa-circle"></i> Built-in functional interfaces — Predicate, Function, Consumer, Supplier</li>
+                                        <li><i class="fa-solid fa-circle"></i> Method references</li>
+                                        <li><i class="fa-solid fa-circle"></i> Stream API — filter, map, reduce</li>
+                                        <li><i class="fa-solid fa-circle"></i> Collectors — toList, groupingBy, joining</li>
+                                        <li><i class="fa-solid fa-circle"></i> Optional — creation & chaining</li>
+                                        <li><i class="fa-solid fa-circle"></i> Parallel streams</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Module 9 -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#module9">
+                                    <span class="flex-grow-1">Modern Java Features</span>
+                                    <span class="module-badge">6 topics</span>
+                                </button>
+                            </h3>
+                            <div id="module9" class="accordion-collapse collapse"
+                                 data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Records — immutable data classes</li>
+                                        <li><i class="fa-solid fa-circle"></i> Sealed classes & interfaces</li>
+                                        <li><i class="fa-solid fa-circle"></i> Pattern matching for instanceof</li>
+                                        <li><i class="fa-solid fa-circle"></i> Pattern matching in switch</li>
+                                        <li><i class="fa-solid fa-circle"></i> Local-variable type inference (var)</li>
+                                        <li><i class="fa-solid fa-circle"></i> New utility methods on Collections & Strings</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Module 10 -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#module10">
+                                    <span class="flex-grow-1">I/O &amp; Concurrency Basics</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="module10" class="accordion-collapse collapse"
+                                 data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Reading & writing files with NIO.2 (Path, Files)</li>
+                                        <li><i class="fa-solid fa-circle"></i> Threads & the Runnable interface</li>
+                                        <li><i class="fa-solid fa-circle"></i> ExecutorService & thread pools</li>
+                                        <li><i class="fa-solid fa-circle"></i> CompletableFuture basics</li>
+                                        <li><i class="fa-solid fa-circle"></i> Virtual threads (Java 21)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <div class="sidebar-card">
+                        <h5>Course Details</h5>
+                        <div class="sidebar-item">
+                            <span class="label">Level</span>
+                            <span class="value">Beginner</span>
+                        </div>
+                        <div class="sidebar-item">
+                            <span class="label">Modules</span>
+                            <span class="value">10</span>
+                        </div>
+                        <div class="sidebar-item">
+                            <span class="label">Topics</span>
+                            <span class="value">61</span>
+                        </div>
+                        <div class="sidebar-item">
+                            <span class="label">Java version</span>
+                            <span class="value">Java 21+</span>
+                        </div>
+                        <div class="sidebar-item">
+                            <span class="label">Prerequisites</span>
+                            <span class="value">None</span>
+                        </div>
+
+                        <hr style="border-color: #30363d; margin: 1.25rem 0;">
+
+                        <h5>What You'll Learn</h5>
+                        <ul class="topic-list">
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Write idiomatic Java using modern syntax</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Design with OOP principles</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Use the Collections Framework confidently</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Write functional-style code with Streams</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Use records, sealed classes & pattern matching</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Handle exceptions & I/O correctly</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="text-center py-4">
+    <div class="container">
+        <p class="mb-0" style="color: #8b949e;">&copy; 2026 SivaLabs.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

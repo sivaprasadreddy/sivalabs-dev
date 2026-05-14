@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering Spring Boot Microservices — SivaLabs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0d1117; color: #e6edf3; padding-top: 64px; }
+        .navbar-dark-custom { background-color: #161b22; border-bottom: 1px solid #30363d; }
+        .navbar-brand-custom { color: #e6edf3 !important; font-weight: 700; letter-spacing: 0.05em; }
+        .nav-link-custom { color: #8b949e !important; font-weight: 600; transition: color 0.2s; }
+        .nav-link-custom:hover { color: #e6edf3 !important; }
+
+        .course-hero {
+            background: radial-gradient(800px circle at 80% 50%, rgba(88, 166, 255, 0.08), transparent 60%),
+                        radial-gradient(600px circle at 20% 50%, rgba(88, 166, 255, 0.05), transparent 60%), #0d1117;
+            padding: 60px 0; border-bottom: 1px solid #30363d;
+        }
+        .course-icon-lg {
+            width: 64px; height: 64px; border-radius: 14px;
+            background-color: rgba(88, 166, 255, 0.12);
+            display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
+        }
+        .badge-level {
+            font-size: 0.78rem; font-weight: 600; padding: 0.3em 0.8em; border-radius: 20px;
+            border: 1px solid rgba(88, 166, 255, 0.4); background-color: rgba(88, 166, 255, 0.1); color: #58a6ff;
+        }
+        .meta-item { display: flex; align-items: center; gap: 0.5rem; color: #8b949e; font-size: 0.9rem; }
+        .meta-item i { color: #58a6ff; width: 16px; }
+
+        .accordion-item { background-color: #161b22; border: 1px solid #30363d; border-radius: 10px !important; overflow: hidden; margin-bottom: 0.5rem; }
+        .accordion-button { background-color: #161b22; color: #e6edf3; font-weight: 600; font-size: 0.95rem; padding: 1rem 1.25rem; border: none; box-shadow: none !important; }
+        .accordion-button:not(.collapsed) { background-color: #1c2128; color: #58a6ff; box-shadow: none !important; }
+        .accordion-button::after { filter: invert(1) brightness(0.6); }
+        .accordion-button:not(.collapsed)::after { filter: invert(60%) sepia(80%) saturate(400%) hue-rotate(190deg) brightness(1.2); }
+        .accordion-body { background-color: #161b22; border-top: 1px solid #30363d; padding: 1rem 1.25rem; }
+
+        .topic-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+        .topic-list li { display: flex; align-items: flex-start; gap: 0.6rem; color: #8b949e; font-size: 0.9rem; line-height: 1.5; }
+        .topic-list li i { color: #58a6ff; margin-top: 3px; flex-shrink: 0; font-size: 0.7rem; }
+
+        .module-badge {
+            font-size: 0.72rem; font-weight: 700; padding: 0.2em 0.6em; border-radius: 6px;
+            background-color: rgba(88, 166, 255, 0.1); color: #58a6ff;
+            border: 1px solid rgba(88, 166, 255, 0.3); margin-right: 0.5rem; white-space: nowrap; flex-shrink: 0;
+        }
+        .sidebar-card { background-color: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 1.5rem; position: sticky; top: 80px; }
+        .sidebar-card h5 { color: #e6edf3; font-weight: 700; margin-bottom: 1rem; }
+        .sidebar-item { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid #21262d; font-size: 0.88rem; }
+        .sidebar-item:last-child { border-bottom: none; }
+        .sidebar-item .label { color: #8b949e; }
+        .sidebar-item .value { color: #e6edf3; font-weight: 600; }
+        footer { background-color: #161b22; border-top: 1px solid #30363d; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark-custom">
+    <div class="container">
+        <a class="navbar-brand navbar-brand-custom" href="/">SIVALABS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="border-color: #30363d;">
+            <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav gap-1">
+                <li class="nav-item"><a class="nav-link nav-link-custom" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link nav-link-custom" href="/index.html">Courses</a></li>
+                <li class="nav-item"><a class="nav-link nav-link-custom" href="/contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <section class="course-hero">
+        <div class="container">
+            <a href="/index.html" class="d-inline-flex align-items-center gap-2 mb-4 text-decoration-none" style="color: #8b949e; font-size: 0.875rem;">
+                <i class="fa-solid fa-arrow-left fa-xs"></i> Back to Courses
+            </a>
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <div class="course-icon-lg"><i class="fa-solid fa-diagram-project" style="color: #58a6ff;"></i></div>
+                <span class="badge-level">Advanced</span>
+            </div>
+            <h1 class="fw-bold mb-3" style="font-size: 2.25rem; color: #e6edf3;">Mastering Spring Boot Microservices</h1>
+            <p style="color: #8b949e; max-width: 640px; line-height: 1.7; margin-bottom: 1.75rem;">
+                Build production-grade distributed systems with Spring Cloud. You'll implement service discovery,
+                API gateways, resilience patterns, event-driven architecture with Kafka, distributed tracing,
+                and deploy everything to Kubernetes — all battle-tested patterns used in real systems.
+            </p>
+            <div class="d-flex flex-wrap gap-4">
+                <div class="meta-item"><i class="fa-solid fa-layer-group"></i><span>10 Modules</span></div>
+                <div class="meta-item"><i class="fa-solid fa-circle-dot"></i><span>59 Topics</span></div>
+                <div class="meta-item"><i class="fa-solid fa-graduation-cap"></i><span>Mastering Spring Boot required</span></div>
+                <div class="meta-item"><i class="fa-solid fa-cloud"></i><span>Spring Cloud 2024.x</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 60px 0 80px;">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-8">
+                    <h2 class="fw-bold mb-4" style="color: #e6edf3; font-size: 1.4rem;">Course Curriculum</h2>
+                    <div class="accordion" id="curriculumAccordion">
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#m1">
+                                    <span class="flex-grow-1">Microservices Foundations</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m1" class="accordion-collapse collapse show" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Microservices patterns & trade-offs</li>
+                                        <li><i class="fa-solid fa-circle"></i> Domain decomposition & bounded contexts</li>
+                                        <li><i class="fa-solid fa-circle"></i> The 12-factor app principles</li>
+                                        <li><i class="fa-solid fa-circle"></i> CAP theorem & eventual consistency</li>
+                                        <li><i class="fa-solid fa-circle"></i> Monolith vs Microservices vs Modular Monolith</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m2">
+                                    <span class="flex-grow-1">Inter-Service Communication</span>
+                                    <span class="module-badge">6 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m2" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Synchronous REST with RestClient & WebClient</li>
+                                        <li><i class="fa-solid fa-circle"></i> Declarative HTTP clients with Spring's @HttpExchange</li>
+                                        <li><i class="fa-solid fa-circle"></i> OpenFeign client</li>
+                                        <li><i class="fa-solid fa-circle"></i> Service-to-service authentication</li>
+                                        <li><i class="fa-solid fa-circle"></i> gRPC basics</li>
+                                        <li><i class="fa-solid fa-circle"></i> API contracts & OpenAPI code generation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m3">
+                                    <span class="flex-grow-1">Service Discovery &amp; Load Balancing</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m3" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Eureka Server setup & registration</li>
+                                        <li><i class="fa-solid fa-circle"></i> Client-side load balancing with Spring Cloud LoadBalancer</li>
+                                        <li><i class="fa-solid fa-circle"></i> Consul as an alternative registry</li>
+                                        <li><i class="fa-solid fa-circle"></i> Health checks & instance metadata</li>
+                                        <li><i class="fa-solid fa-circle"></i> DNS-based discovery in Kubernetes</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m4">
+                                    <span class="flex-grow-1">Resilience Patterns</span>
+                                    <span class="module-badge">6 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m4" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Circuit Breaker with Resilience4j</li>
+                                        <li><i class="fa-solid fa-circle"></i> Retry with exponential backoff</li>
+                                        <li><i class="fa-solid fa-circle"></i> Rate Limiter</li>
+                                        <li><i class="fa-solid fa-circle"></i> Bulkhead pattern</li>
+                                        <li><i class="fa-solid fa-circle"></i> Fallback strategies</li>
+                                        <li><i class="fa-solid fa-circle"></i> Timeout configuration</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m5">
+                                    <span class="flex-grow-1">API Gateway with Spring Cloud Gateway</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m5" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Routing & predicates</li>
+                                        <li><i class="fa-solid fa-circle"></i> Pre & post filters</li>
+                                        <li><i class="fa-solid fa-circle"></i> Rate limiting at the gateway</li>
+                                        <li><i class="fa-solid fa-circle"></i> JWT validation & OAuth2 resource server</li>
+                                        <li><i class="fa-solid fa-circle"></i> Request/response transformation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m6">
+                                    <span class="flex-grow-1">Event-Driven Architecture with Kafka</span>
+                                    <span class="module-badge">7 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m6" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Kafka architecture — topics, partitions, offsets</li>
+                                        <li><i class="fa-solid fa-circle"></i> Producers & consumers with Spring Kafka</li>
+                                        <li><i class="fa-solid fa-circle"></i> Consumer groups & partition assignment</li>
+                                        <li><i class="fa-solid fa-circle"></i> Spring Cloud Stream abstraction</li>
+                                        <li><i class="fa-solid fa-circle"></i> Saga pattern — choreography vs orchestration</li>
+                                        <li><i class="fa-solid fa-circle"></i> Transactional Outbox pattern</li>
+                                        <li><i class="fa-solid fa-circle"></i> Schema registry & Avro serialization</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m7">
+                                    <span class="flex-grow-1">Distributed Tracing &amp; Observability</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m7" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Micrometer Tracing & trace/span propagation</li>
+                                        <li><i class="fa-solid fa-circle"></i> Zipkin & Jaeger for trace visualisation</li>
+                                        <li><i class="fa-solid fa-circle"></i> Correlation IDs across services</li>
+                                        <li><i class="fa-solid fa-circle"></i> Structured & centralised logging with ELK stack</li>
+                                        <li><i class="fa-solid fa-circle"></i> Dashboards with Grafana</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m8">
+                                    <span class="flex-grow-1">Centralised Configuration</span>
+                                    <span class="module-badge">4 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m8" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Spring Cloud Config Server with Git backend</li>
+                                        <li><i class="fa-solid fa-circle"></i> Encrypting sensitive configuration</li>
+                                        <li><i class="fa-solid fa-circle"></i> Dynamic config refresh with Spring Cloud Bus</li>
+                                        <li><i class="fa-solid fa-circle"></i> Secrets management with HashiCorp Vault</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m9">
+                                    <span class="flex-grow-1">Containerisation &amp; Kubernetes</span>
+                                    <span class="module-badge">6 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m9" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Dockerising each microservice</li>
+                                        <li><i class="fa-solid fa-circle"></i> Docker Compose for the full stack locally</li>
+                                        <li><i class="fa-solid fa-circle"></i> Kubernetes Deployments, Services & Ingress</li>
+                                        <li><i class="fa-solid fa-circle"></i> ConfigMaps & Secrets</li>
+                                        <li><i class="fa-solid fa-circle"></i> Liveness & readiness probes</li>
+                                        <li><i class="fa-solid fa-circle"></i> Helm charts basics</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m10">
+                                    <span class="flex-grow-1">Testing Microservices</span>
+                                    <span class="module-badge">5 topics</span>
+                                </button>
+                            </h3>
+                            <div id="m10" class="accordion-collapse collapse" data-bs-parent="#curriculumAccordion">
+                                <div class="accordion-body">
+                                    <ul class="topic-list">
+                                        <li><i class="fa-solid fa-circle"></i> Consumer-driven contract testing with Spring Cloud Contract</li>
+                                        <li><i class="fa-solid fa-circle"></i> Integration tests with Testcontainers</li>
+                                        <li><i class="fa-solid fa-circle"></i> End-to-end tests with Docker Compose</li>
+                                        <li><i class="fa-solid fa-circle"></i> Performance testing with Gatling</li>
+                                        <li><i class="fa-solid fa-circle"></i> Chaos engineering basics</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="sidebar-card">
+                        <h5>Course Details</h5>
+                        <div class="sidebar-item"><span class="label">Level</span><span class="value">Advanced</span></div>
+                        <div class="sidebar-item"><span class="label">Modules</span><span class="value">10</span></div>
+                        <div class="sidebar-item"><span class="label">Topics</span><span class="value">59</span></div>
+                        <div class="sidebar-item"><span class="label">Spring Cloud</span><span class="value">2024.x</span></div>
+                        <div class="sidebar-item"><span class="label">Prerequisites</span><span class="value">Mastering Spring Boot</span></div>
+                        <hr style="border-color: #30363d; margin: 1.25rem 0;">
+                        <h5>What You'll Learn</h5>
+                        <ul class="topic-list">
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Design and decompose microservice systems</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Build resilient services with Resilience4j</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Implement event-driven flows with Kafka</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Route and secure traffic via API Gateway</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Trace requests across distributed services</li>
+                            <li><i class="fa-solid fa-circle-check" style="color: #39d353; font-size: 0.75rem;"></i> Deploy the full stack to Kubernetes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="text-center py-4">
+    <div class="container">
+        <p class="mb-0" style="color: #8b949e;">&copy; 2026 SivaLabs.</p>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
