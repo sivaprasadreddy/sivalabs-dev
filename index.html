@@ -3,40 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SivaLabs</title>
+    <title>Courses — SivaLabs</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" rel="stylesheet">
-    <link href="/static/styles.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117;
+            color: #e6edf3;
+            padding-top: 64px;
+        }
+
+        .navbar-dark-custom {
+            background-color: #161b22;
+            border-bottom: 1px solid #30363d;
+        }
+
+        .navbar-brand-custom {
+            color: #e6edf3 !important;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-link-custom {
+            color: #8b949e !important;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-link-custom:hover,
+        .nav-link-custom.active {
+            color: #e6edf3 !important;
+        }
+
+        .page-hero {
+            background: radial-gradient(900px circle at 50% -20%, rgba(88, 166, 255, 0.12), transparent 60%),
+            #0d1117;
+            padding: 60px 0 50px;
+            border-bottom: 1px solid #30363d;
+        }
+
+        .course-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 1.75rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+        }
+
+        .course-card:hover {
+            border-color: #58a6ff;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .course-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            flex-shrink: 0;
+        }
+
+        .course-title {
+            color: #e6edf3;
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 0.6rem;
+            line-height: 1.4;
+        }
+
+        .course-description {
+            color: #8b949e;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            flex-grow: 1;
+            margin-bottom: 1.25rem;
+        }
+
+        .course-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: auto;
+        }
+
+        .badge-custom {
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 0.3em 0.7em;
+            border-radius: 6px;
+            border: 1px solid;
+        }
+
+        footer {
+            background-color: #161b22;
+            border-top: 1px solid #30363d;
+        }
+    </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark-custom">
     <div class="container">
-        <a class="navbar-brand" href="#">SIVALABS</a>
+        <a class="navbar-brand navbar-brand-custom" href="/">SIVALABS</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav" aria-controls="navbarNav"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+                aria-expanded="false" aria-label="Toggle navigation"
+                style="border-color: #30363d;">
+            <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav gap-1">
                 <li class="nav-item">
-                    <a class="nav-link" href="#profile">Profile</a>
+                    <a class="nav-link nav-link-custom" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#services">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#skills">Skills</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact</a>
+                    <a class="nav-link nav-link-custom" href="/contact.html">Contact</a>
                 </li>
             </ul>
         </div>
@@ -44,324 +140,145 @@
 </nav>
 
 <main>
-    <!-- 1. Profile/Hero Section -->
-    <section id="profile" class="section-padding text-center">
+
+    <!-- Hero -->
+    <section class="page-hero text-center">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <div class="profile-image-container mb-4">
-                        <img src="/static/siva.png"
-                             class="profile-image" alt="Developer Profile Picture"
-                             onerror="this.onerror=null; this.src='https://placehold.co/250x250/0d6efd/ffffff?text=SK';">
-                    </div>
-                </div>
-                <div class="col-lg-6 text-lg-start">
-                    <p class="profile-subtitle">Hello, I'm</p>
-                    <h1 class="profile-title">SIVA</h1>
-                    <p class="lead mb-4">
-                        <span class="text-secondary"><strong>#Software Developer</strong></span>&nbsp;&nbsp;&nbsp;
-                        <span class="text-secondary"><strong>#Architect</strong></span>&nbsp;&nbsp;&nbsp;
-                        <span class="text-secondary"><strong>#Developer Advocate</strong></span>
-                    </p>
-                    <p class="text-muted mb-5">
-                        I'm a passionate software architect with expertise in building scalable web applications.
-                        I enjoy working across the stack and constantly learning new technologies.
-                    </p>
-                    <a href="#contact" class="btn btn-outline-light btn-lg">Get In Touch</a>
-                </div>
-            </div>
+            <h1 class="display-4 fw-bold mb-3" style="color: #e6edf3;">Courses</h1>
+            <p class="lead mb-0" style="color: #8b949e; max-width: 560px; margin: 0 auto;">
+                Expert-crafted courses on Java, Spring Boot, Microservices, and AI Engineering
+            </p>
         </div>
     </section>
 
-    <!-- 2. Services Section - Added subtle light contrast background -->
-    <section id="services" class="section-padding" style="background-color: #f8f9fa;">
+    <!-- Courses Grid -->
+    <section style="padding: 60px 0 80px;">
         <div class="container">
-            <!-- Text color is naturally dark due to light theme CSS -->
-            <h2 class="text-center mb-5 display-4 fw-bold">Services & Expertise</h2>
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
-                <!-- Service Card 1 -->
+                <!-- Java Fundamentals -->
                 <div class="col">
-                    <div class="card h-100 p-4">
-                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=250&fit=crop"
-                             class="card-img-top mb-3" alt="Web development code on laptop"
-                             style="border-top-left-radius: 12px; border-top-right-radius: 12px;">
-                        <h3 class="card-title text-primary mb-3">Fullstack Development</h3>
-                        <p class="card-text text-muted">Building robust full-stack applications using Java, Kotlin, Go, Docker, and Kubernetes.</p>
-                        <div class="mt-3">
-                            <!-- Changed badges to light theme compatible secondary style -->
-                            <span class="badge text-bg-secondary me-2">Frontend</span>
-                            <span class="badge text-bg-secondary">Backend</span>
+                    <div class="course-card">
+                        <div class="course-icon" style="background-color: rgba(248, 152, 32, 0.12);">
+                            <i class="fa-brands fa-java" style="color: #f89820;"></i>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Service Card 2 -->
-                <div class="col">
-                    <div class="card h-100 p-4">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop"
-                             class="card-img-top mb-3" alt="Architecture & Design"
-                             style="border-top-left-radius: 12px; border-top-right-radius: 12px;">
-                        <h3 class="card-title text-primary mb-3">Architecture & Design</h3>
-                        <p class="card-text text-muted">Designing and developing highly performant systems using
-                            Microservices, Modualar Monoliths and Event Driven Architecture.</p>
-                        <div class="mt-3">
-                            <span class="badge text-bg-secondary me-2">Microservices</span>
-                            <span class="badge text-bg-secondary">Monoliths</span>
-                            <span class="badge text-bg-secondary">Modular Monoliths</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Service Card 3 -->
-                <div class="col">
-                    <div class="card h-100 p-4">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop"
-                             class="card-img-top mb-3" alt="Cloud and DevOps infrastructure"
-                             style="border-top-left-radius: 12px; border-top-right-radius: 12px;">
-                        <h3 class="card-title text-primary mb-3">Cloud & DevOps</h3>
-                        <p class="card-text text-muted">
-                            Implementing scalable cloud infrastructure (AWS/GCP), CI/CD pipelines,
-                            and containerization using Docker and Kubernetes.</p>
-                        <div class="mt-3">
-                            <span class="badge text-bg-secondary me-2">Docker</span>
-                            <span class="badge text-bg-secondary">Kubernetes</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="section-padding">
-        <div class="container">
-            <h2 class="text-center mb-3 display-4 fw-bold">Skills</h2>
-            <p class="text-center text-muted mb-4">A snapshot of my day-to-day toolkit as a full‑stack developer</p>
-
-            <div class="row gy-4">
-                <div class="col-md-6 col-lg-4">
-                    <h4 class="fw-bold mb-3">Programming Languages</h4>
-                    <div class="d-flex flex-wrap gap-2">
-                        <span class="badge text-bg-danger">Java</span>
-                        <span class="badge text-bg-danger">Kotlin</span>
-                        <span class="badge text-bg-danger">Go</span>
-                        <span class="badge text-bg-danger">Python</span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <h4 class="fw-bold mb-3">Architecture</h4>
-                    <div class="d-flex flex-wrap gap-2">
-                        <span class="badge text-bg-dark">Microservices</span>
-                        <span class="badge text-bg-dark">Modular Monoliths</span>
-                        <span class="badge text-bg-dark">REST</span>
-                        <span class="badge text-bg-dark">Event Driven Architecture</span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <h4 class="fw-bold mb-3">AI</h4>
-                    <div class="d-flex flex-wrap gap-2">
-                        <span class="badge text-bg-success">Spring AI</span>
-                        <span class="badge text-bg-success">LangChain4j</span>
-                        <span class="badge text-bg-success">Embabel</span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <h4 class="fw-bold mb-3">Backend</h4>
-                    <div class="d-flex flex-wrap gap-2">
-                        <span class="badge text-bg-primary">Spring Boot</span>
-                        <span class="badge text-bg-primary">Spring Security</span>
-                        <span class="badge text-bg-primary">Spring Cloud</span>
-                        <span class="badge text-bg-primary">JPA / Hibernate</span>
-                        <span class="badge text-bg-primary">jOOQ</span>
-                        <span class="badge text-bg-primary">Quarkus</span>
-                        <span class="badge text-bg-primary">Kafka</span>
-                        <span class="badge text-bg-primary">RabbitMQ</span>
-                        <span class="badge text-bg-primary">OAuth2</span>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <h4 class="fw-bold mb-3">Frontend</h4>
-                    <div class="d-flex flex-wrap gap-2">
-                        <span class="badge text-bg-warning">JavaScript</span>
-                        <span class="badge text-bg-warning">TypeScript</span>
-                        <span class="badge text-bg-warning">Angular</span>
-                        <span class="badge text-bg-warning">React</span>
-                        <span class="badge text-bg-warning">Node.js</span>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <h4 class="fw-bold mb-3">Databases</h4>
-                    <div class="d-flex flex-wrap gap-2">
-                        <span class="badge text-bg-success">PostgreSQL</span>
-                        <span class="badge text-bg-success">MySQL</span>
-                        <span class="badge text-bg-success">MongoDB</span>
-                        <span class="badge text-bg-success">Redis</span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <h4 class="fw-bold mb-3">DevOps & Cloud</h4>
-                    <div class="d-flex flex-wrap gap-2">
-                        <span class="badge text-bg-primary">Docker</span>
-                        <span class="badge text-bg-primary">Kubernetes</span>
-                        <span class="badge text-bg-primary">AWS</span>
-                        <span class="badge text-bg-primary">CI/CD</span>
-                        <span class="badge text-bg-primary">Jenkins</span>
-                        <span class="badge text-bg-primary">GitHub Actions</span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <h4 class="fw-bold mb-3">Testing</h4>
-                    <div class="d-flex flex-wrap gap-2">
-                        <span class="badge text-bg-info">JUnit</span>
-                        <span class="badge text-bg-info">Mockito</span>
-                        <span class="badge text-bg-info">Testcontainers</span>
-                        <span class="badge text-bg-info">Gatling</span>
-                        <span class="badge text-bg-info">Playwright</span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <h4 class="fw-bold mb-3">Tools & Build</h4>
-                    <div class="d-flex flex-wrap gap-2">
-                        <span class="badge text-bg-secondary">Git</span>
-                        <span class="badge text-bg-secondary">Maven</span>
-                        <span class="badge text-bg-secondary">Gradle</span>
-                        <span class="badge text-bg-secondary">Linux</span>
-                        <span class="badge text-bg-secondary">IntelliJ IDEA</span>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. Projects Section -->
-    <!--
-    <section id="projects" class="section-padding">
-        <div class="container">
-            <h2 class="text-center mb-5 display-4 fw-bold">Featured Projects</h2>
-            <div class="row g-4">
-
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100">
-                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=250&fit=crop"
-                             class="card-img-top" alt="E-commerce Platform Mockup"
-                             style="border-top-left-radius: 12px; border-top-right-radius: 12px;"
-                             >
-                        <div class="card-body">
-                            <h4 class="card-title text-dark">E-commerce Platform</h4>
-                            <p class="card-text text-muted">
-                                A full-stack e-commerce solution with integrated payment processing, user authentication,
-                                and inventory management system.</p>
-                        </div>
-                        <div class="card-footer border-0 bg-transparent px-4 pb-4">
-                            <span class="badge text-bg-primary me-2">Java</span>
-                            <span class="badge text-bg-primary me-2">Spring Boot</span>
-                            <span class="badge text-bg-primary">Microservices</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100">
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=250&fit=crop"
-                             class="card-img-top" alt="Data Visualization Dashboard Mockup"
-                             style="border-top-left-radius: 12px; border-top-right-radius: 12px;">
-                        <div class="card-body">
-                            <h4 class="card-title text-dark">Data Analytics Dashboard</h4>
-                            <p class="card-text text-muted">Interactive real-time data dashboard built for monitoring server performance and user activity using D3.js and WebSockets.</p>
-                        </div>
-                        <div class="card-footer border-0 bg-transparent px-4 pb-4">
-                            <span class="badge text-bg-primary me-2">Angular</span>
-                            <span class="badge text-bg-primary me-2">D3.js</span>
-                            <span class="badge text-bg-primary">WebSockets</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4 mx-auto">
-                    <div class="card h-100">
-                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=250&fit=crop"
-                             class="card-img-top" alt="Mobile App Concept Mockup"
-                             style="border-top-left-radius: 12px; border-top-right-radius: 12px;">
-                        <div class="card-body">
-                            <h4 class="card-title text-dark">Mobile Task Manager</h4>
-                            <p class="card-text text-muted">
-                                A cross-platform mobile application designed to help teams track tasks and project deadlines
-                                using native device features.
-                            </p>
-                        </div>
-                        <div class="card-footer border-0 bg-transparent px-4 pb-4">
-                            <span class="badge text-bg-primary me-2">React Native</span>
-                            <span class="badge text-bg-primary me-2">Firebase</span>
-                            <span class="badge text-bg-primary">Jest</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
--->
-    <!-- 4. Contact Section - Added a slightly darker background for separation -->
-    <section id="contact" class="section-padding bg-light" style="background-color: #e9ecef;">
-        <div class="container">
-            <h2 class="text-center mb-5 display-4 fw-bold">Let's Connect</h2>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="card p-4 p-md-5">
-                        <p class="lead text-center text-muted mb-4">
-                            Prefer DMs or social? Find me on the platforms below.
+                        <h2 class="course-title">Java Fundamentals</h2>
+                        <p class="course-description">
+                            A comprehensive introduction to Java programming covering core language features,
+                            OOP principles, collections, generics, streams, and modern Java syntax including
+                            records, sealed classes, and pattern matching.
                         </p>
-                        <div class="row row-cols-1 row-cols-sm-2 g-3">
-                            <div class="col">
-                                <a class="btn btn-outline-primary w-100" href="https://sivalabs.in" target="_blank" rel="noopener noreferrer" aria-label="Visit my Blog">
-                                    <i class="fa-solid fa-blog me-2" aria-hidden="true"></i> Blog
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a class="btn btn-outline-primary w-100" href="https://youtube.com/sivalabs" aria-label="Visit my YouTube Channel">
-                                    <i class="fa-brands fa-youtube me-2" aria-hidden="true"></i> YouTube
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a class="btn btn-outline-primary w-100" href="https://twitter.com/sivalabs" target="_blank" rel="noopener noreferrer" aria-label="Visit my Twitter profile">
-                                    <i class="fa-brands fa-x-twitter me-2" aria-hidden="true"></i> Twitter
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a class="btn btn-outline-primary w-100" href="https://www.linkedin.com/in/ksivaprasadreddy" target="_blank" rel="noopener noreferrer" aria-label="Visit my LinkedIn profile">
-                                    <i class="fa-brands fa-linkedin me-2" aria-hidden="true"></i> LinkedIn
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a class="btn btn-outline-primary w-100" href="https://bsky.app/profile/sivalabs.in" target="_blank" rel="noopener noreferrer" aria-label="Visit my Bluesky profile">
-                                    <i class="fa-brands fa-bluesky me-2" aria-hidden="true"></i> Bluesky
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a class="btn btn-outline-primary w-100" href="https://github.com/sivaprasadreddy" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile">
-                                    <i class="fa-brands fa-github me-2" aria-hidden="true"></i> GitHub
-                                </a>
-                            </div>
+                        <div class="course-meta">
+                            <span class="badge-custom" style="color: #f89820; border-color: #f89820; background-color: rgba(248, 152, 32, 0.1);">Java</span>
+                            <span class="badge-custom" style="color: #8b949e; border-color: #30363d; background-color: transparent;">Beginner</span>
                         </div>
                     </div>
                 </div>
+
+                <!-- Mastering Spring Boot -->
+                <div class="col">
+                    <div class="course-card">
+                        <div class="course-icon" style="background-color: rgba(109, 179, 63, 0.12);">
+                            <i class="fa-solid fa-leaf" style="color: #6db33f;"></i>
+                        </div>
+                        <h2 class="course-title">Mastering Spring Boot</h2>
+                        <p class="course-description">
+                            Deep dive into Spring Boot covering REST APIs, data persistence with JPA and jOOQ,
+                            Spring Security, testing strategies with Testcontainers, observability,
+                            and production-ready best practices.
+                        </p>
+                        <div class="course-meta">
+                            <span class="badge-custom" style="color: #6db33f; border-color: #6db33f; background-color: rgba(109, 179, 63, 0.1);">Spring Boot</span>
+                            <span class="badge-custom" style="color: #8b949e; border-color: #30363d; background-color: transparent;">Intermediate</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mastering Spring Boot Microservices -->
+                <div class="col">
+                    <div class="course-card">
+                        <div class="course-icon" style="background-color: rgba(88, 166, 255, 0.12);">
+                            <i class="fa-solid fa-diagram-project" style="color: #58a6ff;"></i>
+                        </div>
+                        <h2 class="course-title">Mastering Spring Boot Microservices</h2>
+                        <p class="course-description">
+                            Build production-grade microservices with Spring Cloud, service discovery,
+                            API gateways, distributed tracing, circuit breakers, and event-driven
+                            patterns using Kafka and RabbitMQ.
+                        </p>
+                        <div class="course-meta">
+                            <span class="badge-custom" style="color: #58a6ff; border-color: #58a6ff; background-color: rgba(88, 166, 255, 0.1);">Microservices</span>
+                            <span class="badge-custom" style="color: #6db33f; border-color: #6db33f; background-color: rgba(109, 179, 63, 0.1);">Spring Boot</span>
+                            <span class="badge-custom" style="color: #8b949e; border-color: #30363d; background-color: transparent;">Advanced</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Agentic Engineering Fundamentals -->
+                <div class="col">
+                    <div class="course-card">
+                        <div class="course-icon" style="background-color: rgba(163, 113, 247, 0.12);">
+                            <i class="fa-solid fa-robot" style="color: #a371f7;"></i>
+                        </div>
+                        <h2 class="course-title">AI Agentic Engineering Fundamentals</h2>
+                        <p class="course-description">
+                            Learn to design and build AI agents, agentic workflows, RAG pipelines, and
+                            multi-agent systems using modern LLM frameworks including Spring AI,
+                            LangChain4j, and Embabel.
+                        </p>
+                        <div class="course-meta">
+                            <span class="badge-custom" style="color: #a371f7; border-color: #a371f7; background-color: rgba(163, 113, 247, 0.1);">AI</span>
+                            <span class="badge-custom" style="color: #8b949e; border-color: #30363d; background-color: transparent;">Intermediate</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Claude Code for Spring Boot -->
+                <div class="col">
+                    <div class="course-card">
+                        <div class="course-icon" style="background-color: rgba(247, 129, 102, 0.12);">
+                            <i class="fa-solid fa-terminal" style="color: #f78166;"></i>
+                        </div>
+                        <h2 class="course-title">Claude Code for Spring Boot Application Developers</h2>
+                        <p class="course-description">
+                            Harness the power of Claude Code to accelerate Spring Boot development —
+                            from scaffolding projects and writing tests to AI-assisted refactoring,
+                            code review, and debugging complex issues.
+                        </p>
+                        <div class="course-meta">
+                            <span class="badge-custom" style="color: #f78166; border-color: #f78166; background-color: rgba(247, 129, 102, 0.1);">Claude Code</span>
+                            <span class="badge-custom" style="color: #6db33f; border-color: #6db33f; background-color: rgba(109, 179, 63, 0.1);">Spring Boot</span>
+                            <span class="badge-custom" style="color: #8b949e; border-color: #30363d; background-color: transparent;">Intermediate</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spec Driven Development -->
+                <div class="col">
+                    <div class="course-card">
+                        <div class="course-icon" style="background-color: rgba(57, 211, 83, 0.12);">
+                            <i class="fa-solid fa-file-code" style="color: #39d353;"></i>
+                        </div>
+                        <h2 class="course-title">Spec Driven Development for Java Developers</h2>
+                        <p class="course-description">
+                            A structured approach to building features with clarity — write specs first,
+                            then implement confidently using the SDD methodology. Covers feature specs,
+                            implementation plans, reviews, and archiving in Java projects.
+                        </p>
+                        <div class="course-meta">
+                            <span class="badge-custom" style="color: #39d353; border-color: #39d353; background-color: rgba(57, 211, 83, 0.1);">SDD</span>
+                            <span class="badge-custom" style="color: #f89820; border-color: #f89820; background-color: rgba(248, 152, 32, 0.1);">Java</span>
+                            <span class="badge-custom" style="color: #8b949e; border-color: #30363d; background-color: transparent;">Intermediate</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
 </main>
 
-<footer class="bg-light text-center py-4 border-top border-secondary opacity-50">
-    <div class="container">
-        <p class="mb-0 text-muted">&copy; 2025 SivaLabs.</p>
-    </div>
-</footer>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/static/app.js">
-</script>
 </body>
 </html>
