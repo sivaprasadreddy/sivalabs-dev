@@ -1,7 +1,8 @@
-baseURL = "https://sivaprasadreddy.github.io/sivalabs-dev/"
+baseURL = "https://www.sivalabs.dev/"
 languageCode = "en-us"
 title = "SivaLabs"
 uglyURLs = true
+relativeURLs = true
 disableKinds = ["taxonomy", "term"]
 
 [caches]
