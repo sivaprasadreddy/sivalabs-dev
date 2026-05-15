@@ -4,6 +4,10 @@ title = "SivaLabs"
 uglyURLs = true
 disableKinds = ["taxonomy", "term"]
 
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
