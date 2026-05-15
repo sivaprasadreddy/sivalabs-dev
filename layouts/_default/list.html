@@ -1,0 +1,22 @@
+{{ define "main" }}
+<main>
+    <section class="page-hero text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3" style="color: #e6edf3;">{{ .Title }}</h1>
+        </div>
+    </section>
+    <section style="padding: 60px 0 80px;">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                {{ range .Pages }}
+                <div class="col">
+                    <a href="{{ .RelPermalink }}" class="course-card text-decoration-none">
+                        <h2 class="course-title">{{ .Title }}</h2>
+                    </a>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+    </section>
+</main>
+{{ end }}
